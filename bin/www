@@ -73,15 +73,14 @@ function onListening() {
 /**
  * Get port from environment and store in Express.
  */
-
-var port = normalizePort(process.env.PORT || '8443');
+var port = normalizePort(process.env.PORT || '8080');
 app.set('port', port);
 
 // If in production, use HTTPS
 if (process.env.ENV !== "DEV") {
   var https_port = process.env.PORT_HTTPS || 8443;
 
-  // Read the SSL certificate and private key from environment variables
+  // Read the SSL certificate and private key from environment variables or paths
   var privatekey = fs.readFileSync('/path/to/privatekey.pem', 'utf8');
   var cert = fs.readFileSync('/path/to/server.crt', 'utf8');
 
@@ -90,8 +89,9 @@ if (process.env.ENV !== "DEV") {
     cert: cert
   };
 
+  // Create HTTPS server
   var server = https.createServer(options, app).listen(https_port, function () {
-    console.log('Magic happens on port ' + https_port);
+    console.log('HTTPS Magic happens on port ' + https_port);
   });
 
   // Redirect HTTP to HTTPS
