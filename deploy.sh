@@ -1,4 +1,4 @@
-# this is the deploy script
+# this is the deploy script FOR HTTP
 sudo apt update && sudo apt install nodejs npm
 
 sudo npm install -g pm2
